@@ -9,6 +9,8 @@ import {
   Shapes,
   User,
   Settings,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from 'lucide-react';
 import {
   SidebarMenu,
@@ -18,6 +20,7 @@ import {
   SidebarHeader,
   SidebarContent,
   SidebarGroup,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { Icons } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
@@ -31,6 +34,7 @@ const menuItems = [
 
 export function SidebarNav() {
   const pathname = usePathname();
+  const { state, toggleSidebar } = useSidebar();
 
   return (
     <>
@@ -70,6 +74,12 @@ export function SidebarNav() {
                         <span>Settings</span>
                     </Link>
                 </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton onClick={toggleSidebar} tooltip={state === 'expanded' ? 'Collapse' : 'Expand'}>
+                {state === 'expanded' ? <PanelLeftClose /> : <PanelLeftOpen />}
+                <span>{state === 'expanded' ? 'Collapse' : 'Expand'}</span>
+              </SidebarMenuButton>
             </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
